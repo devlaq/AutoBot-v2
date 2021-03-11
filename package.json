@@ -1,0 +1,40 @@
+{
+  "name": "autobot2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "ansi-styles": "^4.3.0",
+    "asynckit": "^0.4.0",
+    "chalk": "^4.1.0",
+    "bindings": "^1.5.0",
+    "color-convert": "^2.0.1",
+    "color-name": "^1.1.4",
+    "combined-stream": "^1.0.8",
+    "delayed-stream": "^1.0.0",
+    "discord-rpc": "^3.2.0",
+    "discord.js": "^12.5.1",
+    "event-target-shim": "^5.0.1",
+    "file-uri-to-path": "^1.0.0",
+    "has-flag": "^4.0.0",
+    "mime-db": "^1.45.0",
+    "mime-types": "^2.1.28",
+    "node-addon-api": "^1.7.2",
+    "node-fetch": "^2.6.1",
+    "prism-media": "^1.2.6",
+    "register-scheme": "^0.0.2",
+    "supports-color": "^7.2.0",
+    "setimmediate": "^1.0.5",
+    "tweetnacl": "^1.0.3",
+    "ws": "^7.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "ts-node-dev --rs --respawn --transpile-only src/index.ts",
+    "startdev": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "author": "black",
+  "license": "ISC"
+}
