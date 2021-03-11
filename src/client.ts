@@ -21,7 +21,11 @@ class Client {
 
         this.handleEvents();
         this.loadCommands();
+        this.login();
+    }
 
+    private login() {
+        const { token } = require('../config.json');
         this.client.login(token);
     }
 
