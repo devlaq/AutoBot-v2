@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 
-class Utils {
-    static Embed = class {
+namespace Utils {
+    export class Embed {
         public static createEmbed(title?: any, author?: Discord.User, description?: any, color?: Discord.ColorResolvable, url?: string, timestamp?: number | Date, imageUrl?: string, thumbnailUrl?: string): Discord.MessageEmbed {
             let embed = new Discord.MessageEmbed();
             if(title) embed = embed.setTitle(title);
@@ -16,7 +16,7 @@ class Utils {
         }
     }
 
-    static Color = class {
+    export class Color {
         
         public static randomizeColor() {
 
@@ -24,7 +24,7 @@ class Utils {
 
     }
 
-    static Ping = class {
+    export class Ping {
 
         public static messageLaytency(message: Discord.Message): number {
             return Date.now() - message.createdTimestamp;

@@ -7,8 +7,8 @@
     "abort-controller": "^3.0.0",
     "ansi-styles": "^4.3.0",
     "asynckit": "^0.4.0",
-    "chalk": "^4.1.0",
     "bindings": "^1.5.0",
+    "chalk": "^4.1.0",
     "color-convert": "^2.0.1",
     "color-name": "^1.1.4",
     "combined-stream": "^1.0.8",
@@ -24,12 +24,11 @@
     "node-fetch": "^2.6.1",
     "prism-media": "^1.2.6",
     "register-scheme": "^0.0.2",
-    "supports-color": "^7.2.0",
     "setimmediate": "^1.0.5",
+    "supports-color": "^7.2.0",
     "tweetnacl": "^1.0.3",
     "ws": "^7.4.3"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "ts-node-dev --rs --respawn --transpile-only src/index.ts",
     "startdev": "ts-node src/index.ts",

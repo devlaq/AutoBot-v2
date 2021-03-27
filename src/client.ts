@@ -1,8 +1,9 @@
-import Discord, { User } from 'discord.js';
+import Discord, { ChannelData, User } from 'discord.js';
 import fs from 'fs';
 import { Level, Logger } from './logger';
 import { TCommand, TExecutor } from './command';
 import { TListener } from './event';
+import Data from './data';
 
 class Client {
 
@@ -14,14 +15,21 @@ class Client {
     public commands: Discord.Collection<string, TCommand>;
     public commandPrefix = '/';
 
+    public developers: string[];
+
     public constructor(token: string) {
         Client.instance = this;
         this.client = new Discord.Client();
         this.commands = new Discord.Collection();
 
+        new Data.ChannelDataManager('channelData.json').loadData();
+
         this.handleEvents();
         this.loadCommands();
         this.login();
+
+        const { developers } = require('../config.json');
+        this.developers = developers;
     }
 
     private login() {
@@ -46,6 +54,7 @@ class Client {
                 i++;
             } catch(err) {
                 Logger.log(this.tag, `Error while loading ${file}, skipping`);
+                Logger.log(this.tag, err);
                 skipped++;
             }
             
@@ -74,6 +83,7 @@ class Client {
                 }
             } catch(err) {
                 Logger.log(this.tag, `Can\`t load command ${file}, skipping`);
+                Logger.log(this.tag, err);
                 skipped++;
             }
         }

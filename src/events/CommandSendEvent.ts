@@ -3,6 +3,7 @@ import { Level, Logger } from "../logger";
 import Client from "../client";
 import fs from 'fs';
 import { EventHandler, Listener } from "../event";
+import Utils from "../utils";
 
 @EventHandler('message')
 class CommandSendEvent implements Listener {
@@ -14,16 +15,25 @@ class CommandSendEvent implements Listener {
         const command = cargs.shift()?.toLocaleLowerCase() || '';
         
         if(!client.commands.has(command)) {
-            message.reply('없는 명령어다!! 개발자는 빨리 이 메시지를 수정해라!!!');
             return;
         }
+
+        Logger.log(this.tag, `${message.author.id} issued command '${command}'`);
+
+        
 
         try {
             const c = client.commands.get(command);
             if(!c) return;
+            if(c.indev && !client.developers.includes(message.author.id)) {
+                const embed = Utils.Embed.createEmbed('엑세스 거부 - InDev 명령어', message.author, '개발중인 명령어입니다.\n개발자만 사용할 수 있습니다.');
+                message.channel.send(embed);
+                Logger.log(this.tag, '  Access Denied: InDev Command');
+            }
             await c.execute(client, message, cargs);
         } catch(err) {
-            Logger.log(this.tag, '명령어를 하던 중에 에러가 발생해씀!!!!!!!!!!!!', Level.Error);
+            Logger.log(this.tag, `> Error: ${err}`, Level.Error);
+            Logger.log(this.tag, err, Level.Error);
         }
     }
 }

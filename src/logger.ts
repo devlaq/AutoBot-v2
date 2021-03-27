@@ -2,7 +2,8 @@ import { level } from "chalk";
 
 class Logger {
 
-    public static log(tag: string = '!', message: string, level: Level = Level.Info, format: Format = Format.Default) {
+    public static log(tag: string = '!', message: string | any, level: Level = Level.Info, format: Format = Format.Default) {
+        if(typeof message != 'string' && message.toString != undefined) message = message.toString();
         let formattedString = this.format(tag, message, level, format);
         console.log(formattedString);
     }
