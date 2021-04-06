@@ -6,26 +6,14 @@ namespace Data {
 
         public static dataPath = './src/data/'
 
-        protected data: Map<string, K> = new Map();
+        protected data: Array<K>;
         protected path: string;
 
         public constructor(path: string) {
             this.path = BaseDataManager.dataPath + path;
         }
-
-        public get(id: string): K | undefined {
-            return this.data.get(id);
-        }
-
-        public has(id: string): boolean {
-            return this.data.has(id);
-        }
-
-        public set(id: string, value: K) {
-            this.data.set(id, value);
-        }
-
-        public getData(): Map<string, K> {
+        
+        public getData(): Array<K> {
             return this.data;
         }
 
@@ -37,6 +25,36 @@ namespace Data {
     export class ChannelDataManager extends BaseDataManager<ChannelData> {
 
         public tag = 'data.ts/ChannelDataManager';
+
+        public loadData() {
+            fs.stat(this.path, (err) => {
+                if(err) return;
+                
+                fs.readFile(this.path, (err, data) => {
+                    const r = JSON.parse(data.toString());
+                    console.log(r);
+                    console.log(Object.keys(r['asdf']['tags']));
+                })
+            })
+        }
+
+        public saveData() {
+            fs.stat(this.path, (err) => {
+                if(err) return;
+
+            })
+        }
+
+    }
+
+    interface ChannelData {
+        id: string;
+        tags: string[];
+    }
+
+    export class UserDataManager extends BaseDataManager<UserData> {
+
+        public tag = 'data.ts/UserDataManager';
 
         public loadData() {
             fs.stat(this.path, (err) => {
@@ -58,9 +76,10 @@ namespace Data {
 
     }
 
-    class ChannelData {
+    class UserData {
         public id: string;
-        public tags: string[];
+        public permissions: string[];
+        public verified: boolean;
     }
 }
 
